@@ -1,0 +1,19 @@
+<div class="pure-g-r">
+    <div class="pure-u-1-4 logo">
+        <a href="{{ @BASE }}/" rel="home">
+            <img src="{{ @BASE }}/ui/images/doa.jpg" alt="Doa Nguyen">
+        </a>
+    </div>
+
+    <div class="pure-u-3-4 content">
+        <h1>Blogs</h1>
+
+<p>Since Jan 2015, after almost 2 years survived in Seoul, my vision is changed. I need to do blogging. I want to write not only important things but also a lot of trivial things. </p>
+
+	<ul>
+	<repeat group="{{ @menu }}" value="{{ @link }}">
+		<li><a href="{{ @BASE }}/{{ @link.slug }}">{{ @link.title }}</a> <small>[{{date(@time_format,@link.updated)}}]</small></li>
+	</repeat>
+	</ul>
+</div>
+</div>
