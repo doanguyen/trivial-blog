@@ -14,7 +14,7 @@
         <header>
             <h1 class="title"><a href="" rel="bookmark"><?php echo $menu['title']; ?></a></h1>
         </header>        
-            <p><?php echo Base::instance()->raw($menu['contents']); ?></p>
+            <p><?php echo $content; ?></p>
         <footer>
             <p class="published">
                 Published

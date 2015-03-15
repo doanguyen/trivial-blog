@@ -29,6 +29,53 @@ class Admin extends Controller {
 		$f3->set('body','pages.htm');
 	}
 
+	function robots($f3){
+		$db = $this->db;
+		$slug = $db->exec('SELECT slug FROM pages ORDER BY updated DESC;');
+		$myfile = fopen('robots.txt', "w") or die("Unable to open file!");
+		$txt = "User-Agent: *\nDisallow: \nAllow: /\nAllow: /archives\n";
+		foreach ($slug as $value=>$v){
+			$txt = $txt ."Allow: /".$v['slug']."\n";			
+		}
+		fwrite($myfile, $txt);
+		fclose($myfile);
+		$f3->reroute('/admin/pages');
+	}
+
+	function sitemap($f3){
+		$db = $this->db;
+		$slug = $db->exec('SELECT slug FROM pages ORDER BY updated DESC;');
+		$myfile = fopen('sitemap.xml', "w") or die("Unable to open file!");
+		$now = date('Y-m-d\Th:i:sP');
+		$txt = '<?xml version="1.0" encoding="UTF-8"?>'."\n".
+				'<urlset'."\n".
+				"\t".'xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"'."\n".
+				"\t".'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"'."\n".
+				"\t".'xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9'."\n".
+				"\t".'http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">'."\n".
+				'<url>'."\n".
+				"\t".'<loc>http://doanguyen.com/</loc>'."\n".
+				"\t"."<lastmod>$now</lastmod>\n".
+				"\t".'<changefreq>daily</changefreq>'."\n".
+				'</url>'."\n".
+				'<url>'."\n".
+				"\t".'<loc>http://doanguyen.com/archives</loc>'."\n".
+				"\t".'<changefreq>daily</changefreq>'."\n".
+				'</url>'."\n";
+
+		foreach ($slug as $value=>$v){
+			$txt .= "<url>\n".
+					"\t<loc>http://doanguyen.com/".$v['slug']."</loc>\n".
+					"\t<lastmod>$now</lastmod>\n".
+					"\t<changefreq>daily</changefreq>\n".
+					"</url>\n";
+		}
+		 $txt .="</urlset>";
+		fwrite($myfile, $txt);
+		fclose($myfile);
+		$f3->reroute('/admin/pages');
+	}
+
 	//! Re-sequence pages
 	function move($f3) {
 		$db=$this->db;
@@ -103,7 +150,7 @@ class Admin extends Controller {
 			// Generate slug from title
 			$slug=Web::instance()->slug($f3->get('POST.title'));
 			$id=$f3->get('POST.id');
-			echo $id;
+			#echo $id;
 			if ($slug=='home')
 				$slug='';
 
@@ -119,8 +166,11 @@ class Admin extends Controller {
 				// Replace data
 				$page->copyfrom('POST');
 				$page->set('slug',$slug);
-				$page->set('updated',time());
+				if ($f3->get('POST.utime')){
+					$page->set('updated',time());
+				}
 				$page->save();
+				
 
 			// Redirect
 			$f3->reroute('/admin/pages');

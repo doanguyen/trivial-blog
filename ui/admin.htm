@@ -1,14 +1,6 @@
 <div class="menu">
-	<ul>
-	<repeat group="{{ @menu }}" key="{{ @link }}" value="{{ @title }}">
-		<check if="{{ @URI==@BASE.@link }}">
-		<true>
-		<li class="active">{{ @title }}</li>
-		</true>
-		<false>
-		<li><a href="{{ @BASE.@link }}">{{ @title }}</a></li>
-		</false>
-		</check>
-	</repeat>
-	</ul>
+	<a href="{{ @BASE }}/admin/pages">Home</a>|
+	<a href="{{@BASE}}/admin/pages/edit?new="> New page</a> |
+	<a href="{{ @BASE }}/admin/robots">Build Robots</a> |
+	<a href="{{ @BASE }}/admin/sitemap">Sitemap</a>
 </div>

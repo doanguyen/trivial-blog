@@ -18,7 +18,7 @@ final class Base {
 
 	//@{ Framework details
 	const
-		PACKAGE='Fat-Free Framework',
+		PACKAGE='Doanguyen',
 		VERSION='3.0.7-Dev';
 	//@}
 

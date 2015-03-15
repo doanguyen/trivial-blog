@@ -18,13 +18,19 @@ class CMS extends Controller {
 		$f3->set('toptitle','Archives');
 		$f3->set('menu',
 			$db->exec('SELECT * FROM pages ORDER BY updated DESC;'));
-		if ($page->dry()) {
+		#if ($page->dry()) {
 			#$f3->error(404);
-			$f3->set('body','error.htm'); #die;
-		}
-		else {
+		#	$f3->set('body','error.htm'); #die;
+		#}
+		#else {
 			$f3->set('body','archives.htm');
-		}
+		#}
+	}
+	
+	function publications($f3,$args){
+		$db=$this->db;
+		$f3->set('toptitle','Publications');
+		$f3->set('body','publications-index.htm');
 	}
 
 	function singleblog($f3,$args) {
@@ -36,6 +42,7 @@ class CMS extends Controller {
 		$menu = $db->exec("SELECT * FROM pages WHERE slug='$slug';");
 		$f3->set('toptitle',$menu[0]['title']);
 		$f3->set('menu',$menu[0]);
+		$f3->set('content',$menu[0]['contents']);
 		if ($page->dry()) {
 			#$f3->error(404);
 			$f3->set('body','error.htm'); #die;

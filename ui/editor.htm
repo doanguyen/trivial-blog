@@ -6,13 +6,24 @@
 		<p class="message">{{ @message }}</p>
 		</check>
 		<p>
+		<table>
+		<tr><td>
 			<label for="title"><small>Title</small></label><br />
-			<input id="title" name="title" type="text"  size="100" {{ isset(@POST.title)?('value="'.@POST.title.'"'):'' }} />
+			<input id="title" name="title" type="text"  size="60" {{ isset(@POST.title)?('value="'.@POST.title.'"'):'' }} />
 			<input type="hidden" id="id" name="id" value="{{@POST.id}}">
+		</td>
+		<check if="{{ isset(@POST.title) }}">
+		<td>
+			<label for="checkbox"><small>Update time?</small></label><br />
+			<input type="checkbox" id="utime" name="utime">
+		</td>
+		</check>
+		</tr>
+		</table>
 		</p>
 		<p>
 			<label for="contents"><small>Contents</small></label><br />
-			<textarea id="contents" name="contents">{{ isset(@POST.contents)?@POST.contents:'' }}</textarea>
+			<textarea id="contents" name="contents">{{ isset(@POST.contents)?@POST.contents:'' |raw }}</textarea>
 		</p>
 		<check if="{{ isset(@POST.updated) && @POST.updated }}">
 		<p><small>Last updated {{ date(@time_format,@POST.updated) }}</small></p>

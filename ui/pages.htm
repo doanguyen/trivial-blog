@@ -1,4 +1,4 @@
-
+<include href="admin.htm" />
 <div class="main">
 	<h3>Pages</h3>
 	<table>
@@ -6,6 +6,8 @@
 		<repeat group="{{ @pages }}" value="{{ @page }}" counter="{{ @counter }}">
 		<tr {{ @counter%2?'class="odd"':'' }}>
 			<td class="title"><a href="{{ @BASE }}/admin/pages/edit?id={{ @page.id }}">{{ @page.title }}</a><br /><small>{{ @page.updated?date(@time_format,@page.updated):'&nbsp;' }}</small></td>
+
+			<td><a href="{{ @BASE }}/{{@page.slug}}">View</td>
 			
 		</tr>
 		</repeat>
