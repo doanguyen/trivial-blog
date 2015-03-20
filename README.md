@@ -3,6 +3,8 @@ A small and easy configuration blog written in PHP (FatFree Framework) and using
 
 TODO:
 * [x] Sitemap.xml, robots.txt build
+* [x] Move Trumbowyg to CKeditor.
+* [x] Nginx configuration
 * [ ] Publication lists management.
-* [ ] Move Trumbowyg to CKeditor.
 * [ ] BBcode, Code tag
+

@@ -1,0 +1,15 @@
+User-Agent: *
+Disallow: 
+Allow: /
+Allow: /archives
+Allow: /how-to-focus-your-mind-instantly
+Allow: /worth-website
+Allow: /some-idioms-related-to-science
+Allow: /guide-to-publishing-a-scientific-paper
+Allow: /iksan-mountain-on-04-may-2014
+Allow: /start-up-nation-miracles-are-real
+Allow: /cst-2013
+Allow: /how-to-win-friends-and-influence-people
+Allow: /six-thinking-hats
+Allow: /the-seven-habits-of-highly-effective-people
+Allow: /sublime-text-a-better-lightweight-text-editor

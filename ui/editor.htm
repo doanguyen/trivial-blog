@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{@BASE}}/ui/css/trumbowyg.min.css">
+<script src="/ui/ckeditor/ckeditor.js"></script>
 <div class="main">
 	<form method="post" action="{{ @BASE }}/admin/pages/exec" class="editor">
 		<h1>{{ isset(@POST.title)?'Edit':'New' }} Page</h1>
@@ -23,7 +23,7 @@
 		</p>
 		<p>
 			<label for="contents"><small>Contents</small></label><br />
-			<textarea id="contents" name="contents">{{ isset(@POST.contents)?@POST.contents:'' |raw }}</textarea>
+			<textarea id="contents" name="contents" rows="40">{{ isset(@POST.contents)?@POST.contents:'' |raw }}</textarea>
 		</p>
 		<check if="{{ isset(@POST.updated) && @POST.updated }}">
 		<p><small>Last updated {{ date(@time_format,@POST.updated) }}</small></p>
@@ -34,10 +34,6 @@
 	</form>
 </div>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
-<script src="{{@BASE}}/ui/js/trumbowyg.min.js"></script>
-<script>$('#contents').trumbowyg({
-
-
-});</script>
+<script>
+	CKEDITOR.replace( 'contents' );
+</script>
