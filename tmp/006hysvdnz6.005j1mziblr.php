@@ -1,6 +1,6 @@
 <script src="/ui/ckeditor/ckeditor.js"></script>
 <div class="main">
-	<form method="post" action="<?php echo $BASE; ?>/admin/pages/exec" class="editor">
+	<form method="post" action="<?php echo $BASE; ?>/admin/pages/<?php echo isset($POST['title'])?'exec':'newpage'; ?>" class="editor">
 		<h1><?php echo isset($POST['title'])?'Edit':'New'; ?> Page</h1>
 		<?php if (isset($message)): ?>
 		<p class="message"><?php echo $message; ?></p>

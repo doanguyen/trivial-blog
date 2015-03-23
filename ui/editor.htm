@@ -1,6 +1,6 @@
 <script src="/ui/ckeditor/ckeditor.js"></script>
 <div class="main">
-	<form method="post" action="{{ @BASE }}/admin/pages/exec" class="editor">
+	<form method="post" action="{{ @BASE }}/admin/pages/{{ isset(@POST.title)?'exec':'newpage'}}" class="editor">
 		<h1>{{ isset(@POST.title)?'Edit':'New' }} Page</h1>
 		<check if="{{ isset(@message) }}">
 		<p class="message">{{ @message }}</p>

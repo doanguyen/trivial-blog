@@ -143,14 +143,12 @@ class Admin extends Controller {
 		// Validate submitted form
 		if (!$f3->exists('POST.title') || !strlen($f3->get('POST.title')))
 			$f3->set('message','Title is required');
-		elseif (!$f3->exists('POST.contents') ||
-			!strlen($f3->get('POST.contents')))
+		elseif (!$f3->exists('POST.contents') || !strlen($f3->get('POST.contents')))
 			$f3->set('message','Page contents cannot be blank');
 		else {
 			// Generate slug from title
 			$slug=Web::instance()->slug($f3->get('POST.title'));
 			$id=$f3->get('POST.id');
-			#echo $id;
 			if ($slug=='home')
 				$slug='';
 
@@ -158,10 +156,9 @@ class Admin extends Controller {
 				$page->load(array('id=?',$id));
 				if ($page->dry()) {
 					// Determine highest position in sequence
-					$query=current(
-						$db->exec(
-							'SELECT MAX(id) AS maxpos FROM pages;'));
-					$page->set('id',$query['maxpos']+1);
+					$query=current($db->exec('SELECT MAX(id) AS maxpos FROM pages;'));
+					
+					#echo $query['maxpos']+2;exit();
 				}
 				// Replace data
 				$page->copyfrom('POST');
@@ -178,7 +175,35 @@ class Admin extends Controller {
 		// Define HTML subtemplate
 		$f3->set('body','editor.htm');
 	}
+	
+	function newpage($f3) {
+		$db=$this->db;
+		$page=new DB\SQL\Mapper($db,'pages');
+		$f3->set('toptitle','New article');
+		// Validate submitted form
+		if (!$f3->exists('POST.title') || !strlen($f3->get('POST.title')))
+			$f3->set('message','Title is required');
+		elseif (!$f3->exists('POST.contents') || !strlen($f3->get('POST.contents')))
+			$f3->set('message','Page contents cannot be blank');
+		else {
+			// Generate slug from title
+			$slug=Web::instance()->slug($f3->get('POST.title'));
+			$title = $f3->get('POST.title');
 
+			// Determine highest position in sequence
+			$query=current($db->exec('SELECT MAX(id) AS maxpos FROM pages;'));
+			$pageid = $query['maxpos']+1;
+			// Replace data
+			$content = $f3->get('POST.title');
+			$utime = time();
+			$db->exec("INSERT INTO `pages`(`slug`,`id`,`title`,`contents`,`updated`) VALUES ('$slug','$pageid','$title','$content','$utime')");
+
+			// Redirect
+			$f3->reroute('/admin/pages');
+		}
+		// Define HTML subtemplate
+		$f3->set('body','editor.htm');
+	}
 	//! List assets
 	function assets($f3) {
 		// Build list from files in the uploads folder

@@ -2,6 +2,7 @@ User-Agent: *
 Disallow: 
 Allow: /
 Allow: /archives
+Allow: /sublime-text-the-text-editor-youll-fall-in-love-with
 Allow: /how-to-focus-your-mind-instantly
 Allow: /worth-website
 Allow: /some-idioms-related-to-science
