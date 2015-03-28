@@ -194,7 +194,7 @@ class Admin extends Controller {
 			$query=current($db->exec('SELECT MAX(id) AS maxpos FROM pages;'));
 			$pageid = $query['maxpos']+1;
 			// Replace data
-			$content = $f3->get('POST.title');
+			$content = $f3->get('POST.contents');
 			$utime = time();
 			$db->exec("INSERT INTO `pages`(`slug`,`id`,`title`,`contents`,`updated`) VALUES ('$slug','$pageid','$title','$content','$utime')");
 

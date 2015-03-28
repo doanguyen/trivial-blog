@@ -7,6 +7,11 @@
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.4.2/pure-min.css">
 		<link rel="stylesheet" href="{{@BASE}}/ui/css/core.css" type="text/css" />
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+		<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+	<script type="text/javascript"  src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
 	</head>
 	<body>
 		<include href="{{ @body }}" />
@@ -21,4 +26,6 @@
 	ga('create', 'UA-37376311-1', 'auto');
 	ga('send', 'pageview');
 	</script>
+	
+
 </html>
