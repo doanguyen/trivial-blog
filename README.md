@@ -1,5 +1,5 @@
 # Trivial-blog
-A small and easy configuration blog written in PHP (FatFree Framework) and using SQLite to store articles.
+A small and easily configuration blog written in PHP (FatFree Framework) and using SQLite to store articles.
 
 TODO:
 * [x] Sitemap.xml, robots.txt build
